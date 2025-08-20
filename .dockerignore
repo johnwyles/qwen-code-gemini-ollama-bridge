@@ -1,0 +1,94 @@
+# Version control
+.git
+.gitignore
+.gitattributes
+.gitmodules
+
+# Documentation
+README.md
+CHANGELOG.md
+LICENSE
+*.md
+
+# Docker files
+.dockerignore
+Dockerfile*
+docker-compose*.yml
+.docker
+
+# Build artifacts and dependencies
+node_modules
+**/node_modules
+gemini-openai-bridge/node_modules
+gemini-openai-bridge/coverage
+gemini-openai-bridge/test
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm
+.yarn
+
+# Environment files
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# IDE and editor files
+.vscode
+.idea
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Logs
+logs
+*.log
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage
+*.lcov
+
+# Temporary files
+.tmp
+.temp
+tmp/
+temp/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Build outputs
+dist/
+build/
+out/
+
+# Cache directories
+.cache
+.parcel-cache
+
+# Test files
+test/
+tests/
+__tests__/
+*.test.js
+*.spec.js
+
+# Configuration files (these will be mounted as volumes)
+config/
+workspace/

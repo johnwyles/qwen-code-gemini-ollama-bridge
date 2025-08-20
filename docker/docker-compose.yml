@@ -1,0 +1,41 @@
+services:
+  qwen-code:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: qwen-code-docker
+    container_name: qwen-code
+    stdin_open: true
+    tty: true
+    environment:
+      # qwen-code CLI configuration
+      - OPENAI_BASE_URL=${OPENAI_BASE_URL:-http://localhost:11434/v1}
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      - OPENAI_MODEL=${OPENAI_MODEL:-qwen3-coder:latest}
+      - GEMINI_DEFAULT_AUTH_TYPE=${GEMINI_DEFAULT_AUTH_TYPE:-openai}
+      
+      # qwen-code CLI config path
+      - QWEN_CONFIG_PATH=/home/qwen/.config
+      
+      # Gemini-OpenAI Bridge configuration
+      - USE_GEMINI_BRIDGE=${USE_GEMINI_BRIDGE:-false}
+      - BRIDGE_TARGET_URL=${BRIDGE_TARGET_URL:-${OPENAI_BASE_URL}}
+      - BRIDGE_PORT=${BRIDGE_PORT:-8080}
+      - BRIDGE_DEBUG=${BRIDGE_DEBUG:-false}
+    volumes:
+      # Mount current directory to /workspace (main working directory)
+      - ..:/workspace
+      # Mount home directory to preserve all user configurations
+      - ../home:/home/qwen
+    working_dir: /workspace
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - qwen-network
+    restart: unless-stopped
+    # Keep container running
+    command: tail -f /dev/null
+
+networks:
+  qwen-network:
+    driver: bridge
